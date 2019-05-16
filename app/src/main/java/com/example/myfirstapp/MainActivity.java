@@ -3,15 +3,14 @@ package com.example.myfirstapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    private static final String TAG = "MainActivity";
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     BottomNavigationView bottomNavigationView;
@@ -23,13 +22,33 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
 
-        bottomNavigationView.setSelectedItemId(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_shopping_cart);
 
     }
 
+    ShoppingCart shoppingCartFragment = new ShoppingCart();
+    Catalog catalogFragment = new Catalog();
+    Graph graphFragment = new Graph();
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.i(TAG, "onNavigationItemSelected");
+
+        switch (item.getItemId()) {
+            case R.id.navigation_shopping_cart:
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out).replace(R.id.frameLayout, shoppingCartFragment).commit();
+                return true;
+
+            case R.id.navigation_catalog:
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out).replace(R.id.frameLayout, catalogFragment).commit();
+                return true;
+
+            case R.id.navigation_graphs:
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out).replace(R.id.frameLayout, graphFragment).commit();
+                return true;
+        }
+
         return false;
     }
 
