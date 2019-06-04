@@ -1,19 +1,22 @@
 package com.example.myfirstapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    private static final String TAG = "MainActivity";
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    private static final String TAG = "MainActivity";
 
     BottomNavigationView bottomNavigationView;
+    ShoppingCart shoppingCartFragment = new ShoppingCart();
+    Catalog catalogFragment = new Catalog();
+    Graph graphFragment = new Graph();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +29,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setSelectedItemId(R.id.navigation_shopping_cart);
 
     }
-
-    ShoppingCart shoppingCartFragment = new ShoppingCart();
-    Catalog catalogFragment = new Catalog();
-    Graph graphFragment = new Graph();
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
